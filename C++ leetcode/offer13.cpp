@@ -1,23 +1,23 @@
 /*****************************************************************************************************
- *         ��ָoffer��5��
- * ����������ͷָ���һ�����ָ�룬����һ����������O(1)ʱ��ɾ���ý�㡣
+ *         剑指offer第13题
+ * 给定链表的头指针和一个结点指针，定义一个函数在在O(1)时间删除该结点。
  *
- * Input:  ���������ĳ����Լ�ÿ���ڵ������Ҫɾ���Ľڵ�
- * Output: ɾ����ĵ�������
+ * Input:  单向链表的长度以及每个节点的数和要删除的节点
+ * Output: 删除后的单向链表
  *
  *
- * Note: (Ǭ����Ų��---ʱ�临�Ӷ�)
- * ����һ����Ϊ������Google�����⣬����Ч�������ǵı�̻����������ܿ������ǵķ�Ӧ�ٶȣ�����Ҫ���ǣ�����
-   �������Ƕ�ʱ�临�Ӷȵ����⡣��������ɾ��һ����㣬���������Ǵ�������ͷ��㿪ʼ��˳�����Ҫɾ����
-   ��㣬�ҵ�֮����ɾ����������Ҫ˳����ң�ʱ�临�Ӷ���Ȼ����O(n)�ˡ� ����֮������Ҫ��ͷ��㿪ʼ����Ҫ
-   ɾ���Ľ�㣬����Ϊ������Ҫ�õ�Ҫɾ���Ľ���ǰ��һ����㡣�������Ż�һ��˼·��
+ * Note: (乾坤大挪移---时间复杂度)
+ * 这是一道广为流传的Google面试题，能有效考察我们的编程基本功，还能考察我们的反应速度，更重要的是，还能
+   考察我们对时间复杂度的理解。在链表中删除一个结点，最常规的做法是从链表的头结点开始，顺序查找要删除的
+   结点，找到之后再删除。由于需要顺序查找，时间复杂度自然就是O(n)了。 我们之所以需要从头结点开始查找要
+   删除的结点，是因为我们需要得到要删除的结点的前面一个结点。我们试着换一种思路。
 
-   ���ǿ��ԴӸ����Ľ��õ�������һ����㡣���ʱ������ʵ���ܹ�ɾ������������һ����㣬���������Ѿ��õ�
-   ʵ��ɾ���Ľ���ǰ��һ����㣬�����ȫ�ǿ���ʵ�ֵġ���Ȼ����ɾ��֮ǰ��������Ҫ��Ҫ�Ѹ����Ľ�����һ
-   ���������ݿ����������Ľ���С���ʱ��ʱ�临�Ӷ�ΪO(1)��
-   �����˼·����һ�����⣺���ɾ���Ľ��λ��������β����û����һ����㣬��ô�죿
-   ������Ȼ��������ͷ��㿪ʼ��˳������õ���������ǰ���㣬�����ɾ�����������ʱ��ʱ�临�Ӷ���O(n)��
-   ֻ�е������Ľ�㴦������ĩβ��ʱ��ʱ�临�Ӷ�ΪO(n)����ôƽ��ʱ�临�Ӷ�[(n-1)*O(1)+O(n)]/n����ȻΪO(1)��
+   我们可以从给定的结点得到它的下一个结点。这个时候我们实际能够删除的是它的下一个结点，由于我们已经得到
+   实际删除的结点的前面一个结点，因此完全是可以实现的。当然，在删除之前，我们需要需要把给定的结点的下一
+   个结点的数据拷贝到给定的结点中。此时，时间复杂度为O(1)。
+   上面的思路还有一个问题：如果删除的结点位于链表的尾部，没有下一个结点，怎么办？
+   我们仍然从链表的头结点开始，顺便遍历得到给定结点的前序结点，并完成删除操作。这个时候时间复杂度是O(n)。
+   只有当给定的结点处于链表末尾的时候，时间复杂度为O(n)。那么平均时间复杂度[(n-1)*O(1)+O(n)]/n，仍然为O(1)。
  * author: lcxanhui@163.com
  * time: 2019.4.21
  ******************************************************************************************************/
@@ -27,7 +27,7 @@
 #include<string>
 using namespace std;
 
-//���������ṹ
+//定义链表结构
 struct ListNode
 {
 	int value;
@@ -35,7 +35,7 @@ struct ListNode
 	//ListNode(int x) :value(x), next(NULL) {}
 };
 
-//��ӡ����
+//打印链表
 void printList(ListNode* head, string name)
 {
 	cout << name;
@@ -51,22 +51,22 @@ void DeleteNode(ListNode* Listhead, ListNode* TobeDelete)
 {
 	if (Listhead == NULL || TobeDelete == NULL)
 		return;
-	if (TobeDelete->next != NULL)        //���Ҫɾ���Ľڵ����һλ��λNULL,������β��㣬����һ�ڵ��ֵ���Ƶ�Ҫ		                                   
-	{                                    //ɾ���Ľ�㣬ָ����һ�ڵ�Ľڵ㣬������һ�ڵ�ɾ��
+	if (TobeDelete->next != NULL)        //如果要删除的节点的下一位不位NULL,即不是尾结点，则将下一节点的值复制到要		                                   
+	{                                    //删除的结点，指向下一节点的节点，并将下一节点删除
 		ListNode* tmp = TobeDelete->next;
 		TobeDelete->value = tmp->value;
 		TobeDelete->next = tmp->next;
 
-		delete tmp;                    //ɾ����һ�ڵ�
+		delete tmp;                    //删除下一节点
 		tmp = NULL;
 	}
-	else if (Listhead == TobeDelete)         //���������������ֻ��һ���ڵ㲢��ΪҪɾ���Ľڵ�
+	else if (Listhead == TobeDelete)         //特殊情况：当链表只有一个节点并且为要删除的节点
 	{
 		delete TobeDelete;
 		TobeDelete = NULL;
 		Listhead = NULL;
 	}
-	else                                //β�������������Ҫ˳�������ʱ�临�Ӷ�ΪO(n)
+	else                                //尾结点的情况，必须要顺序遍历，时间复杂度为O(n)
 	{
 		ListNode* Node = Listhead;
 		while(Node->next != TobeDelete)
@@ -74,7 +74,7 @@ void DeleteNode(ListNode* Listhead, ListNode* TobeDelete)
 			Node = Node->next;
 		}
 		Node->next = NULL;
-		delete TobeDelete;               //��Ҫɾ���ڵ�����ΪNULL����ɾ��Ҫɾ���Ľڵ�
+		delete TobeDelete;               //将要删除节点设置为NULL，并删除要删除的节点
 		TobeDelete = NULL;
 	}
 }
@@ -116,7 +116,7 @@ int main()
 	DeleteNode(myList,TobeDelete);
 	printList(myList, "After deeation: ");
 
-	//ɾ������
+	//删除链表
 	while (myList != NULL)
 	{
 		ListNode* tmp = myList;
