@@ -1,14 +1,14 @@
 /*****************************************************************************************************
- *         ½£Ö¸offerµÚ20Ìâ
- * ÊäÈëÒ»¸ö¾ØÕó£¬°´ÕÕ´ÓÍâÏòÀïÒÔË³Ê±ÕëµÄË³ÐòÒÀ´Î´òÓ¡³öÃ¿Ò»¸öÊý×Ö£¬ÀýÈç£¬Èç¹ûÊäÈëÈçÏÂ4 X 4¾ØÕó£º 
-   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ÔòÒÀ´Î´òÓ¡³öÊý×Ö1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
+ *         å‰‘æŒ‡offerç¬¬20é¢˜
+ * è¾“å…¥ä¸€ä¸ªçŸ©é˜µï¼ŒæŒ‰ç…§ä»Žå¤–å‘é‡Œä»¥é¡ºæ—¶é’ˆçš„é¡ºåºä¾æ¬¡æ‰“å°å‡ºæ¯ä¸€ä¸ªæ•°å­—ï¼Œä¾‹å¦‚ï¼Œå¦‚æžœè¾“å…¥å¦‚ä¸‹4 X 4çŸ©é˜µï¼š 
+   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 åˆ™ä¾æ¬¡æ‰“å°å‡ºæ•°å­—1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
  *
- * Input:  ¶þÎ¬¾ØÕó
- * Output: ´ÓÍâÏòÀïÒÔË³Ê±Õë´òÓ¡µÄÒ»Î¬¾ØÕó
+ * Input:  äºŒç»´çŸ©é˜µ
+ * Output: ä»Žå¤–å‘é‡Œä»¥é¡ºæ—¶é’ˆæ‰“å°çš„ä¸€ç»´çŸ©é˜µ
  *
- * Note: £¨½áºÏÍ¼·ÖÎö±È½ÏÖ±¹Û£©
- * Ã¿Ò»È¦Êä³ö¾ØÕó×ÜÊÇ´Ó£¨i£¬i£©¿ªÊ¼£¬²¢ÇÒÃ¿Ò»È¦¶¼ÓÐËÄ²½×é³É£¨¿Ú×ÖÐÍ£©£¬ÆäÖÐµÚÒ»²½Ò»¶¨´æÔÚ£¬µÚ¶þ¡¢µÚ
-   ÈýºÍµÚËÄ²½Öè´æÔÚÓë·ñÐèÒªÌõ¼þ½øÐÐÅÐ¶Ï
+ * Note: ï¼ˆç»“åˆå›¾åˆ†æžæ¯”è¾ƒç›´è§‚ï¼‰
+ * æ¯ä¸€åœˆè¾“å‡ºçŸ©é˜µæ€»æ˜¯ä»Žï¼ˆiï¼Œiï¼‰å¼€å§‹ï¼Œå¹¶ä¸”æ¯ä¸€åœˆéƒ½æœ‰å››æ­¥ç»„æˆï¼ˆå£å­—åž‹ï¼‰ï¼Œå…¶ä¸­ç¬¬ä¸€æ­¥ä¸€å®šå­˜åœ¨ï¼Œç¬¬äºŒã€ç¬¬
+   ä¸‰å’Œç¬¬å››æ­¥éª¤å­˜åœ¨ä¸Žå¦éœ€è¦æ¡ä»¶è¿›è¡Œåˆ¤æ–­
  * author: lcxanhui@163.com
  * time: 2019.5.5
  ******************************************************************************************************/
@@ -27,16 +27,16 @@ vector<int> PrintInCircle(vector<vector<int> > matrix)
 	if (row==0 || col==0)
 		return res;
 	int left = 0, top = 0;
-	int right = col - 1, bottom = row - 1;      //***×¢Òâ´ËÊ±µÄÓÒÉèÖÃµÄÎª×î´óÁÐ£¬µ×Îª×î´óÐÐ***
+	int right = col - 1, bottom = row - 1;      //***æ³¨æ„æ­¤æ—¶çš„å³è®¾ç½®çš„ä¸ºæœ€å¤§åˆ—ï¼Œåº•ä¸ºæœ€å¤§è¡Œ***
 	while (left<=right && top<=bottom)
 	{
-		for (int i = 0; i <= right; i++)   //´Ó×óµ½ÓÒµÚÒ»²½£¬Ò»È¦µÄÆðÊ¼Ò»¶¨´æÔÚ
+		for (int i = left; i <= right; i++)   //ä»Žå·¦åˆ°å³ç¬¬ä¸€æ­¥ï¼Œä¸€åœˆçš„èµ·å§‹ä¸€å®šå­˜åœ¨
 			res.push_back(matrix[top][i]);
-		for (int i = top+1; i <= bottom; i++)   //´ÓÉÏµ½ÏÂµÚ¶þ²½
+		for (int i = top+1; i <= bottom; i++)   //ä»Žä¸Šåˆ°ä¸‹ç¬¬äºŒæ­¥
 			res.push_back(matrix[i][right]);
-		if (top != bottom)            //´ÓÓÒµ½×óµÚÈý²½
+		if (top != bottom)            //ä»Žå³åˆ°å·¦ç¬¬ä¸‰æ­¥
 			for (int i = right - 1; i >= left; i--)  res.push_back(matrix[bottom][i]);
-		if (left != right)            // ´ÓÏÂµ½ÉÏµÚËÄ²½
+		if (left != right)            // ä»Žä¸‹åˆ°ä¸Šç¬¬å››æ­¥
 			for (int i = bottom - 1; i >= top + 1; i--)  res.push_back(matrix[i][left]);
 		left++, top++, right--, bottom--;
 	}
@@ -45,28 +45,28 @@ vector<int> PrintInCircle(vector<vector<int> > matrix)
 
 int main()
 {
-	vector<vector<int>> arr;  //ÕâÀïÒ²¿ÉÒÔÖ±½Ó¶¨ÒåÏòÁ¿µÄ³ß´ç
-	//³õÊ¼»¯
+	vector<vector<int>> arr;  //è¿™é‡Œä¹Ÿå¯ä»¥ç›´æŽ¥å®šä¹‰å‘é‡çš„å°ºå¯¸
+	//åˆå§‹åŒ–
 	int row,column;
-	cout << "ÇëÊäÈëÊý×éµÄÐÐÊýºÍÁÐÊý£º";
+	cout << "è¯·è¾“å…¥æ•°ç»„çš„è¡Œæ•°å’Œåˆ—æ•°ï¼š";
 	cin >> row >> column;
-	//ÏÂÃæÊÇ¸øÏòÁ¿·ÖÅä´æ´¢¿Õ¼ä
+	//ä¸‹é¢æ˜¯ç»™å‘é‡åˆ†é…å­˜å‚¨ç©ºé—´
 	arr.resize(row);
 	for (int i = 0; i < row; i++)
 	{
 		arr[i].resize(column);
 	}
-	//´æÈëÔªËØ
-	cout << "ÇëÊäÈëÊý×éÔªËØ£º" << endl;
+	//å­˜å…¥å…ƒç´ 
+	cout << "è¯·è¾“å…¥æ•°ç»„å…ƒç´ ï¼š" << endl;
 	for (int m = 0; m < row; m++)
 	{
 		for (int n = 0; n < column; n++)
 		{
-			cin >> arr[m][n]; //ÀûÓÃcinÔÚÃüÁî¿òÖÐÒ»¸ö¸öÊäÈë
-			//Ò²¿ÉÒÔÊÇÏÂÃæµÄ·½Ê½Ö±½ÓÊäÈë£¬arr[m][n] = m+n£¬¿ÉÒÔµÈÓÚm+n£¬Ò²¿ÉÒÔµÈÓÚÆäËûÊý×Ö
+			cin >> arr[m][n]; //åˆ©ç”¨cinåœ¨å‘½ä»¤æ¡†ä¸­ä¸€ä¸ªä¸ªè¾“å…¥
+			//ä¹Ÿå¯ä»¥æ˜¯ä¸‹é¢çš„æ–¹å¼ç›´æŽ¥è¾“å…¥ï¼Œarr[m][n] = m+nï¼Œå¯ä»¥ç­‰äºŽm+nï¼Œä¹Ÿå¯ä»¥ç­‰äºŽå…¶ä»–æ•°å­—
 		}
 	}
-	//´òÓ¡Êý×é
+	//æ‰“å°æ•°ç»„
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < column; j++)
 		{
