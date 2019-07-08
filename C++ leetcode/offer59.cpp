@@ -6,7 +6,7 @@
  * Output: 二叉树是否是对称的
  *
  * Note:(本题分为递归和非递归的做法，重点掌握非递归的做法)
- * 思路都是相同的：
+ * 思路都是相同的：用前序遍历的经典做法来进行
    从上到下递归遍历，比较左右两棵子树，分别错位比较，
    即左子树的左节点与右子树的右节点比较，左子树的右节点与右子树的左节点比较
 
@@ -102,18 +102,21 @@ bool isSymmetrical(TreeNode *root)
 			p1 = p1->left;
 			p2 = p2->right;
 		}
-		p1 = s1.top();
-		p2 = s2.top();
-		s1.pop();
-		s2.pop();
-		if (p1->val != p2->val)
-			return false;
-		p1 = p1->right;
-		p2 = p2->left;
+		if(!s1.empty() && !s2.empty())
+		{
+			p1 = s1.top();
+			p2 = s2.top();
+			s1.pop();
+			s2.pop();
+			if (p1->val != p2->val)
+				return false;
+			p1 = p1->right;
+			p2 = p2->left;
+		}
 	}
 	if (!s1.empty() || !s2.empty())
 		return false;
-	if(p1 != NULL && p2 != NULL)
+	if(p1 != NULL || p2 != NULL)
 		return false;
 	return true;
 }
