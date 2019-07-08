@@ -1,14 +1,14 @@
 /*****************************************************************************************************
- *                    ��ָoffer��59��
- * ��ʵ��һ�������������ж�һ�Ŷ������ǲ��ǶԳƵġ�ע�⣬���һ��������ͬ�˶������ľ�����ͬ���ģ�������Ϊ�ԳƵġ�
+ *                    剑指offer第59题
+ * 请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
  *
- * Input:  ������
- * Output: �������Ƿ��ǶԳƵ�
+ * Input:  二叉树
+ * Output: 二叉树是否是对称的
  *
- * Note:(�����Ϊ�ݹ�ͷǵݹ���������ص����շǵݹ������)
- * ˼·������ͬ�ģ�
-   ���ϵ��µݹ�������Ƚ����������������ֱ��λ�Ƚϣ�
-   ������������ڵ������������ҽڵ�Ƚϣ����������ҽڵ�������������ڵ�Ƚ�
+ * Note:(本题分为递归和非递归的做法，重点掌握非递归的做法)
+ * 思路都是相同的：
+   从上到下递归遍历，比较左右两棵子树，分别错位比较，
+   即左子树的左节点与右子树的右节点比较，左子树的右节点与右子树的左节点比较
 
  * author: lcxanhui@163.com
  * time: 2019.7.6
@@ -29,7 +29,7 @@ struct TreeNode {
 	//TreeNode(int x) :val(x), left(NULL), right(NULL), next(NULL) {
 	//}
 };
-//������
+//创建树
 void CreateTree(TreeNode **root, int n)
 {
 	if (n <= 0)
@@ -53,7 +53,7 @@ void CreateTree(TreeNode **root, int n)
 	}
 	*root = arr[0];
 }
-//ɾ����
+//删除树
 void DeleteTree(TreeNode **root)
 {
 	if ((*root) == NULL)
@@ -62,14 +62,14 @@ void DeleteTree(TreeNode **root)
 	DeleteTree(&((*root)->right));
 	delete *root;
 }
-//�ݹ��������Ƚϼ�
+//递归做法，比较简单
 //bool isSame(TreeNode *p1, TreeNode *p2)
 //{
-//	if (p1->left == NULL && p2->right == NULL)
+//	if (p1 == NULL && p2 == NULL)
 //		return true;
-//	if (p1->left != NULL && p2->right == NULL)
+//	if (p1 != NULL && p2 == NULL)
 //		return false;
-//	if (p1->left == NULL && p2->right != NULL)
+//	if (p1 == NULL && p2 != NULL)
 //		return false;
 //	if (p1->val == p2->val)
 //		return isSame(p1->left, p2->right) && isSame(p1->right, p2->left);
@@ -85,7 +85,7 @@ void DeleteTree(TreeNode **root)
 
 
 
-//�ǵݹ���������Ҫ�õ�stack��ÿ�ηǵݹ�����ṹ��������Ҫ�õ�stack�ṹ����Ҫ��������
+//非递归做法，需要用到stack，每次非递归对树结构操作，都要用到stack结构，需要熟练掌握
 bool isSymmetrical(TreeNode *root)
 {
 	if (root == NULL)
