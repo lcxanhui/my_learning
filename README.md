@@ -21,7 +21,6 @@
 
 * **第四章 解决面试的思路**  
   * [剑指offer第19题（二叉树的镜像）](https://github.com/lcxanhui/my_learning/blob/master/C%2B%2B%20leetcode/offer19.cpp)
-  
   * [剑指offer第20题（顺时针打印矩阵）](https://github.com/lcxanhui/my_learning/blob/master/C%2B%2B%20leetcode/offer20.cpp)
   * [剑指offer第21题（包含min函数的栈）](https://github.com/lcxanhui/my_learning/blob/master/C%2B%2B%20leetcode/offer21.cpp)
   * [剑指offer第22题（栈的压入、弹出序列）](https://github.com/lcxanhui/my_learning/blob/master/C%2B%2B%20leetcode/offer22.cpp)
